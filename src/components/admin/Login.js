@@ -8,13 +8,13 @@ import Api from '../../api/Api';
 import qs from 'qs';
 
 function Login() {
-    const [adminKey, setadminKey] = useState();
+    const [adminForm, setadminForm] = useState(null);
 
     let toggleState = (e) => {
         if (e.target.value === 'signIn') {
-            setadminKey(null);
+            setadminForm(null);
         } else {
-            setadminKey(signUp);
+            setadminForm(signUp);
         }
     }
 
@@ -26,13 +26,14 @@ function Login() {
     let handleChange = (e) => {
         const key = e.target.id;
         const value = e.target.value;
-        setFormData({ ...formData, [key]: value });
+        setFormData(formData => { return {...formData, [key]: value} });
+        console.log(formData);
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        const action = adminKey == null ? "login" : "register";
-        console.log(formData + action);
+        const action = adminForm == null ? "login" : "register";
+        console.log(action);
         Api.post(`/admin/${action}`, qs.stringify(formData))
           .then(function (response) {
             console.log(response);
@@ -44,13 +45,17 @@ function Login() {
 
     const signUp =
         <>
-            <Form.Group className="mb-3" controlId="name" onChange={handleChange} >
+            <Form.Group className="mb-3" controlId="name" >
                 <Form.Label>Enter name</Form.Label>
                 <Form.Control required type="text" placeholder="Name" />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="adminKey" onChange={handleChange} >
+            <Form.Group className="mb-3" controlId="ADMIN_KEY"  >
                 <Form.Label>Admin key</Form.Label>
                 <Form.Control required type="password" placeholder="Key" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="image"  >
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control required type="text" placeholder="Key" />
             </Form.Group>
         </>
 
@@ -71,8 +76,8 @@ function Login() {
                         </ToggleButton>
                     </ToggleButtonGroup>
                     <br />
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" controlId="username" onChange={handleChange} >
+                    <Form onSubmit={handleSubmit} onChange={handleChange}>
+                        <Form.Group className="mb-3" controlId="username"  >
                             <Form.Label>Username</Form.Label>
                             <Form.Control required type="text" placeholder="Enter username" />
                             <Form.Text className="text-muted">
@@ -80,11 +85,11 @@ function Login() {
                             </Form.Text>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="password" onChange={handleChange} >
+                        <Form.Group className="mb-3" controlId="password"  >
                             <Form.Label>Password</Form.Label>
                             <Form.Control required type="password" placeholder="Password" />
                         </Form.Group>
-                        {adminKey}
+                        {adminForm}
                         <Button variant="primary" style={{ width: '100%' }} type="submit">
                             Submit
                         </Button>
