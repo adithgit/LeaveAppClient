@@ -32,6 +32,7 @@ function Login() {
 
     let handleSubmit = (e) => {
         e.preventDefault();
+        e.target.lastChild.innerText = "Please Wait.."
         const action = adminForm == null ? "login" : "register";
         console.log(action);
         Api.post(`/admin/${action}`, qs.stringify(formData))
@@ -67,7 +68,7 @@ function Login() {
             </div>
             <div className='admin-container'>
                 <div className="admin-wrap">
-                    <ToggleButtonGroup type="radio"  name="options" style={{ width: '100%', marginBottom: '2vh' }} defaultValue={'signIn'}>
+                    <ToggleButtonGroup type="radio"  name="options" style={{ width: '100%', marginBottom: '1vh' }} defaultValue={'signIn'}>
                         <ToggleButton id="tbg-radio-1" value={'signIn'}  onChange={toggleState}>
                             Sign-in
                         </ToggleButton>
@@ -76,6 +77,7 @@ function Login() {
                         </ToggleButton>
                     </ToggleButtonGroup>
                     <br />
+                    {/* handleChange declared here -> to prevent unexpected behaviour as part of 'Form' is stored in a state. */}
                     <Form onSubmit={handleSubmit} onChange={handleChange}>
                         <Form.Group className="mb-3" controlId="username"  >
                             <Form.Label>Username</Form.Label>
