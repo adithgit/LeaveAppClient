@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './admin.css'
+import './common.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Api from '../api/Api';
