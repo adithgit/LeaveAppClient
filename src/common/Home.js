@@ -3,7 +3,7 @@ import Add from '../components/admin/Add'
 import './common.css';
 import { useState } from 'react'; 
 import Remove from '../components/admin/Remove';
-;
+
 
 function Home() {
   const [form, setForm] = useState(null);
