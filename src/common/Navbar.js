@@ -4,7 +4,7 @@ import './common.css'
 function Navbar() {
   return (
     <div className='navbar'>
-    <h1>Leave Now!</h1>
+    <h1>MinimaLeave</h1>
     </div>
   )
 }

@@ -84,12 +84,12 @@
     margin: 3vh;
     border-radius: 1vh;
     font-size: x-large;
+    max-height: 30%;
 }
 
 .title {
     width: 100%;
     text-align: center;
-    text-decoration: underline;
 }
 
 .feature-box:hover {

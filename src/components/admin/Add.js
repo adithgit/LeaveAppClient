@@ -4,18 +4,26 @@ import { Button } from 'react-bootstrap';
 import Api from '../../api/Api';
 import './admin.css';
 import qs from 'qs';
+import { Toast } from 'react-bootstrap';
 
 function Add(props) {
   const [data, setData] = useState(null);
+  const [show, setShow]= useState({show:false});
+
+  const toggleToast = () => {
+    setShow(prev => { return {show:!prev.show}});
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     Api.post(`/admin/add/${props.type}`, qs.stringify(data))
       .then(function (response) {
-        console.log(response);
+        if(response.status === 200){
+          setShow({show:true, data:`New ${props.type} created`, bg:'success'});
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        setShow({show:true, data:`Cannot create ${props.type}`, bg:'danger'})
       });
   }
   const handleChange = (e) => {
@@ -28,6 +36,18 @@ function Add(props) {
   return (
     <div className='add' >
       <div className="form-container">
+      <Toast bg={show.bg} style={{position:'absolute'}} show={show.show} syle={{color:'black'}} onClose={toggleToast}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Message</strong>
+            <small>now</small>
+          </Toast.Header>
+          <Toast.Body >{show.data}</Toast.Body>
+        </Toast>
         <Form onSubmit={handleSubmit}>
           <h3 style={{ textAlign: 'center' }}>Enter {props.type} Data</h3>
           <Form.Group className="mb-3" onChange={handleChange} controlId="username">
