@@ -34,7 +34,7 @@ function Add(props) {
         <Form.Control type="email" placeholder="Enter email" />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="success" type="submit">
         Submit
       </Button>
       <Button variant="primary" style={{marginLeft:'1vh'}} onClick={props.cancelHandle}>

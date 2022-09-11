@@ -1,7 +1,8 @@
 import React from 'react'
 import Add from '../components/admin/Add'
 import './common.css';
-import { useState } from 'react'; import { Button } from 'react-bootstrap';
+import { useState } from 'react'; 
+import Remove from '../components/admin/Remove';
 ;
 
 function Home() {
@@ -9,8 +10,14 @@ function Home() {
   const handleAdd = (e) => {
     setForm(<Add type={e.target.id} cancelHandle={cancelHandle} />)
   }
+  const handleRemove = (e) => {
+    setForm(<Remove type={e.target.id} cancelHandle={cancelHandle} />);
+  }
   const cancelHandle = () => {
     setForm(null)
+  }
+  const handleHistory = (e) => {
+
   }
   return (
     <div className='home'>
@@ -57,20 +64,20 @@ function Home() {
         </div>
         <div className="feature-box" id='parent' onClick={handleAdd}>
           Add Parent
-        </div>
-        <div className="feature-box">
+        </div> 
+        <div className="feature-box" id='parent' onClick={handleRemove} >
           Remove Parent
         </div>
-        <div className="feature-box">
-          Remove hod
+        <div className="feature-box" id='hod' onClick={handleRemove} >
+          Remove Hod
         </div>
-        <div className="feature-box">
-          Add Parent
+        <div className="feature-box" id='student' onClick={handleRemove} >
+          Remove Student
         </div>
-        <div className="feature-box">
+        <div className="feature-box" id='history' onClick={handleHistory}>
           History
         </div>
-        <div className="feature-box">
+        <div className="feature-box" >
           History
         </div>
       </div>
