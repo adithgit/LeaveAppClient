@@ -7,9 +7,13 @@ import AdminFunc from '../components/admin/AdminFunc';
 import HodFunc from '../components/hod/HodFunc';
 import Api from '../api/Api';
 import Student from '../components/hod/Student';
+import StudFunc from '../components/student/StudFunc';
+import Data from '../components/student/Data';
+import Apply from '../components/student/Apply';
 
 function Home() {
   const [form, setForm] = useState(null);
+  // Admin
   const handleAdd = (e) => {
     setForm(<Add type={e.target.id} cancelHandle={cancelHandle} />)
   }
@@ -19,8 +23,26 @@ function Home() {
   const cancelHandle = () => {
     setForm(null)
   }
+  // Hod
   const getStudents = () => {
     setForm(<Student cancelHandle={cancelHandle}  />)
+  }
+
+  const getPending = () =>{
+    setForm(<Student pending cancelHandle={cancelHandle} />)
+  }
+// Student
+  const getHistory = () => {
+    Api.get('/student/history/631e2b4f2d808b336c61190a').then((response)=>{
+      const data = response.data.data;
+      console.log(response);
+      setForm(<Data data={data} cancelHandle={cancelHandle} />)
+  }).catch((err)=>{
+  })
+  }
+
+  const applyLeave = () => {
+    setForm(<Apply cancelHandle={cancelHandle} />)
   }
   return (
     <div className='home'>
@@ -54,7 +76,7 @@ function Home() {
       </div>
       
     {form || <>
-    <HodFunc getStudents={getStudents} cancelHandle={cancelHandle} />
+    <HodFunc getStudents={getStudents} getPending={getPending} cancelHandle={cancelHandle}  />
     </>}
 
     </div>

@@ -9,12 +9,9 @@ function HodFunc(props) {
         <div className="feature-box" id='get-students' onClick={props.getStudents}   >
           View Students
         </div>
-        <div className="feature-box" id='student'>
-          Pending Requests
+        <div className="feature-box" id='student' onClick={props.getPending}>
+          Student Requests
         </div>
-        <div className="feature-box" id='parent' onClick={props.getAllHistory}  >
-           All History
-        </div> 
       </div>
   )
 }

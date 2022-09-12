@@ -16,6 +16,9 @@ function Student(props) {
     Api.get(`/hod/students/${semester}/cs`)
       .then(function (response){
         if(response.status === 200){
+          if(props.pending){
+            
+          }
           setResult(response.data.data);
         }
       })
@@ -34,7 +37,7 @@ function Student(props) {
     <div className='add'>
     {
     result ? 
-    <Data data={result} backHandler={backHandler} />
+    <Data data={result} pending={props.pending} backHandler={backHandler} />
     :
     <div className="form-container">
     
