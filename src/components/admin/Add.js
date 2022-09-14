@@ -76,12 +76,12 @@ function Add(props) {
               <Form.Control type="string" placeholder="Enter semester" />
             </Form.Group> : ''}
 
-
+{/* 
           {props.type === 'parent' ?
             <Form.Group className="mb-3" onChange={handleChange} controlId="student">
               <Form.Label>Student Username</Form.Label>
               <Form.Control type="string" placeholder="Enter username" />
-            </Form.Group> : ''}
+            </Form.Group> : ''} */}
 
           <Form.Group className="mb-3" onChange={handleChange} controlId="image">
             <Form.Label>Image</Form.Label>

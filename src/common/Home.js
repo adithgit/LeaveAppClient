@@ -10,6 +10,8 @@ import Student from '../components/hod/Student';
 import StudFunc from '../components/student/StudFunc';
 import Data from '../components/student/Data';
 import Apply from '../components/student/Apply';
+import ParentFunc from '../components/parent/ParentFunc';
+import AddChild from '../components/parent/AddChild';
 
 function Home() {
   const [form, setForm] = useState(null);
@@ -44,6 +46,20 @@ function Home() {
   const applyLeave = () => {
     setForm(<Apply cancelHandle={cancelHandle} />)
   }
+  // Parent
+  
+  const parentPending = () => {
+
+  }
+
+  const parentStudents = () => {
+    
+  }
+
+  const addChild = () => {
+    setForm(<AddChild cancelHandle={cancelHandle}  />)
+  }
+
   return (
     <div className='home'>
 
@@ -76,7 +92,7 @@ function Home() {
       </div>
       
     {form || <>
-    <HodFunc getStudents={getStudents} getPending={getPending} cancelHandle={cancelHandle}  />
+    <ParentFunc getStudents={parentStudents} getPending={parentPending} addChild={addChild} cancelHandle={cancelHandle}  />
     </>}
 
     </div>

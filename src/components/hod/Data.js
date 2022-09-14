@@ -113,7 +113,7 @@ function Data(props) {
                                                                 <td>{value.finalstatus}</td>
 
                                                                 <Button value={value._id} onClick={grantLeave} variant='success' style={{ color: 'black', marginInline: '1vh', marginBottom: '1vh' }}>Accept</Button>
-                                                                <Button variant='danger' onClick={rejectLeave} style={{ marginInline: '1vh', marginBottom: '1vh' }}>Reject</Button>
+                                                                <Button value={value._id}  variant='danger' onClick={rejectLeave} style={{ marginInline: '1vh', marginBottom: '1vh' }}>Reject</Button>
 
                                                             </tr>
                                                         }
