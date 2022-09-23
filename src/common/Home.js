@@ -12,6 +12,7 @@ import Data from '../components/student/Data';
 import Apply from '../components/student/Apply';
 import ParentFunc from '../components/parent/ParentFunc';
 import AddChild from '../components/parent/AddChild';
+import Children from '../components/parent/Children';
 
 function Home() {
   const [form, setForm] = useState(null);
@@ -49,11 +50,21 @@ function Home() {
   // Parent
   
   const parentPending = () => {
-
+    Api.get('/parent/children/62cc5d83f8a07326d766e29a').then((response)=>{
+      const data = response.data.data;
+      console.log(response);
+      setForm( <Children cancelHandle={cancelHandle} pending data={data} />);
+  }).catch((err)=>{
+  })
   }
 
   const parentStudents = () => {
-    
+    Api.get('/parent/children/62cc5d83f8a07326d766e29a').then((response)=>{
+      const data = response.data.data;
+      console.log(response);
+      setForm( <Children cancelHandle={cancelHandle} data={data} />);
+  }).catch((err)=>{
+  })
   }
 
   const addChild = () => {

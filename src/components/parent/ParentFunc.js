@@ -10,7 +10,7 @@ function ParentFunc(props) {
           Add child
         </div>
         <div className="feature-box" id='get-students' onClick={props.getStudents}   >
-          View Students
+          View Children
         </div>
         <div className="feature-box" id='student' onClick={props.getPending}>
           Show pending
