@@ -69,7 +69,7 @@ function UserLogin(props) {
               <Form.Control required type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="primary" style={{ width: '100%' }} type="submit">
-              Submit
+              Login
             </Button>
           </Form>
         </div>

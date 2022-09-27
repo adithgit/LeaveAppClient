@@ -92,7 +92,7 @@ function Login() {
                         </Form.Group>
                         {adminForm}
                         <Button variant="primary" style={{ width: '100%' }} type="submit">
-                            Submit
+                            Login
                         </Button>
                     </Form>
                 </div>
