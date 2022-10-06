@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './admin.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,9 +6,18 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import Api from '../../api/Api';
 import qs from 'qs';
+import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    const navigate = useNavigate();
     const [adminForm, setadminForm] = useState(null);
+
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('userdata'))) {
+            navigate('/home')
+        }
+    })
 
     let toggleState = (e) => {
         if (e.target.value === 'signIn') {
@@ -26,7 +35,7 @@ function Login() {
     let handleChange = (e) => {
         const key = e.target.id;
         const value = e.target.value;
-        setFormData(formData => { return {...formData, [key]: value} });
+        setFormData(formData => { return { ...formData, [key]: value } });
         console.log(formData);
     }
 
@@ -34,14 +43,16 @@ function Login() {
         e.preventDefault();
         e.target.lastChild.innerText = "Please Wait.."
         const action = adminForm == null ? "login" : "register";
-        console.log(action);
+
         Api.post(`/admin/${action}`, qs.stringify(formData))
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+            .then(function (response) {
+                if (action === 'register') return navigate('/admin/login');
+                localStorage.setItem('userdata', JSON.stringify(response.data.data));
+                navigate('/home');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     const signUp =
@@ -63,12 +74,12 @@ function Login() {
     return (
         <div className='admin-login'>
             <div className='logo-container'>
-                <img src="adminlogin.png" alt="" />
+                <img src="/adminlogin.png" alt="" />
             </div>
             <div className='admin-container'>
                 <div className="admin-wrap">
-                    <ToggleButtonGroup type="radio"  name="options" style={{ width: '100%', marginBottom: '1vh' }} defaultValue={'signIn'}>
-                        <ToggleButton id="tbg-radio-1" value={'signIn'}  onChange={toggleState}>
+                    <ToggleButtonGroup type="radio" name="options" style={{ width: '100%', marginBottom: '1vh' }} defaultValue={'signIn'}>
+                        <ToggleButton id="tbg-radio-1" value={'signIn'} onChange={toggleState}>
                             Sign-in
                         </ToggleButton>
                         <ToggleButton id="tbg-radio-2" value={'signUp'} onChange={toggleState}>

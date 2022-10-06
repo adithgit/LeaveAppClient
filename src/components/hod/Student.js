@@ -13,7 +13,7 @@ function Student(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Api.get(`/hod/students/${semester}/cs`)
+    Api.get(`/hod/students/${semester}`)
       .then(function (response){
         if(response.status === 200){
           if(props.pending){

@@ -16,10 +16,13 @@ function AddChild(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const parentDetails = JSON.parse(localStorage.getItem('userdata'));
         const payload = data;
-        payload.parent = '62cc720efd172ecfb7119699';
+        console.log(parentDetails._id);
+        payload.parent = parentDetails._id;
         Api.post('/parent/add', 
         qs.stringify(payload)).then((response)=>{
+            console.log(response);
             setShow({
                 data:'added Child',
                 show:true,

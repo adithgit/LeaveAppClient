@@ -24,12 +24,6 @@ function AdminFunc(props) {
         <div className="feature-box" id='student' onClick={props.handleRemove} >
           Remove Student
         </div>
-        <div className="feature-box" id='history' onClick={props.handleHistory}>
-          History
-        </div>
-        <div className="feature-box" >
-          History
-        </div>
       </div>
   )
 }

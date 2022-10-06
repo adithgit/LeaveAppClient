@@ -1,35 +1,16 @@
 import './App.css'
 import Navbar from './common/Navbar';
-import UserLogin from './common/UserLogin';
-import Login from './components/admin/Login'
-import Home from './common/Home';
 import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
+  Outlet,
 } from "react-router-dom";
-
+import { useState } from 'react';
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <UserLogin />,
-    },
-    {
-      path: "/admin",
-      element: <Login />,
-    },
-    {
-      path: "/home",
-      element: <Home />,
-    },
-  ]);
-  
+  const [user, setUser] = useState({});
   return (
     <div className="App">
       <Navbar />
-      <RouterProvider router={router} />
+      <Outlet />
     </div>
   );
 }

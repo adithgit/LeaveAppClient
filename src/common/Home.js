@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Add from '../components/admin/Add'
 import './common.css';
 import { useState } from 'react'; 
@@ -13,9 +13,29 @@ import Apply from '../components/student/Apply';
 import ParentFunc from '../components/parent/ParentFunc';
 import AddChild from '../components/parent/AddChild';
 import Children from '../components/parent/Children';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
+
   const [form, setForm] = useState(null);
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    setUser(JSON.parse(localStorage.getItem('userdata')));
+  }, []);
+
+
+  const logOut = ()=>{
+    var userdata = JSON.stringify(localStorage.getItem('userdata')); 
+    localStorage.removeItem('userdata');
+    console.log(userdata);
+    if(userdata.type != 'admin') return navigate('/user/login');
+    navigate('/admin/login');
+  }
+  
   // Admin
   const handleAdd = (e) => {
     setForm(<Add type={e.target.id} cancelHandle={cancelHandle} />)
@@ -26,6 +46,7 @@ function Home() {
   const cancelHandle = () => {
     setForm(null)
   }
+
   // Hod
   const getStudents = () => {
     setForm(<Student cancelHandle={cancelHandle}  />)
@@ -34,9 +55,10 @@ function Home() {
   const getPending = () =>{
     setForm(<Student pending cancelHandle={cancelHandle} />)
   }
+
 // Student
   const getHistory = () => {
-    Api.get('/student/history/631e2b4f2d808b336c61190a').then((response)=>{
+    Api.get('/student/history').then((response)=>{
       const data = response.data.data;
       console.log(response);
       setForm(<Data data={data} cancelHandle={cancelHandle} />)
@@ -47,10 +69,10 @@ function Home() {
   const applyLeave = () => {
     setForm(<Apply cancelHandle={cancelHandle} />)
   }
+
   // Parent
-  
   const parentPending = () => {
-    Api.get('/parent/children/62cc5d83f8a07326d766e29a').then((response)=>{
+    Api.get('/parent/children').then((response)=>{
       const data = response.data.data;
       console.log(response);
       setForm( <Children cancelHandle={cancelHandle} pending data={data} />);
@@ -59,7 +81,7 @@ function Home() {
   }
 
   const parentStudents = () => {
-    Api.get('/parent/children/62cc5d83f8a07326d766e29a').then((response)=>{
+    Api.get('/parent/children').then((response)=>{
       const data = response.data.data;
       console.log(response);
       setForm( <Children cancelHandle={cancelHandle} data={data} />);
@@ -76,35 +98,35 @@ function Home() {
 
 <div className="sidebar-container">
         <div className="title">
-          <h2>Admin Details</h2>
+          <h2>{user.type} Details</h2>
         </div>
         <div className="sidebar">
           <div className="data">
-            <h4>Username</h4>
+            <h4>Name</h4>
             :
-            <h4>Adithya</h4>
+            <h4>{user.name}</h4>
           </div>
           <div className="data">
             <h4>Username</h4>
             :
-            <h4>Adithya</h4>
-          </div>
-          <div className="data">
-            <h4>Username</h4>
-            :
-            <h4>Adithya</h4>
-          </div>
-          <div className="data">
-            <h4>Username</h4>
-            :
-            <h4>Adithya</h4>
+            <h4>{user.username}</h4>
           </div>
         </div>
       </div>
       
     {form || <>
-    <ParentFunc getStudents={parentStudents} getPending={parentPending} addChild={addChild} cancelHandle={cancelHandle}  />
+    {
+      user.type === 'parent' ? <ParentFunc getStudents={parentStudents} getPending={parentPending} addChild={addChild} cancelHandle={cancelHandle}  />
+      :
+      user.type === 'hod' ? <HodFunc getStudents={getStudents} getPending={getPending} cancelHandle={cancelHandle}  />
+      :
+      user.type === 'student' ? <StudFunc getHistory={getHistory} applyLeave={applyLeave}  cancelHandle={cancelHandle}  />
+      :
+      <AdminFunc handleRemove={handleRemove} handleAdd={handleAdd} /> 
+    }    
     </>}
+
+    <Button onClick={logOut}>Log out</Button>
 
     </div>
   )
