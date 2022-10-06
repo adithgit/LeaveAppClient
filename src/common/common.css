@@ -27,6 +27,29 @@
     background-color: rgb(255, 255, 255);
 }
 
+@media (max-width:1100px) {
+    .admin-container{
+        width: 100% !important;
+        padding-inline: 5vh !important;
+    }
+    .logo-container{
+        width: 100% !important;
+        padding-top: 0 !important;
+    }
+    .logo-container img{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        width: 100% !important;
+    }
+    .admin-login{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .admin-wrap{
+        margin: 1vh !important;
+    }
+}
 
 /* Nvabar */
 
@@ -50,7 +73,6 @@
     color: white;
     padding: 3vh;
     display: flex;
-    flex-wrap: wrap;
     min-width: 100%;
     justify-content: space-between;
 }
@@ -61,6 +83,7 @@
     padding: 2vh;
     border: 1px solid white;
     border-radius: 1vh;
+    height: fit-content;
 }
 
 .functions {
@@ -96,16 +119,52 @@
     box-shadow: 1px 1px 20px rgb(255, 255, 255);
     cursor: pointer;
 }
+.object{
+    width: 50%;
+    text-align: center;
+}
 
 .data{
     display: flex;
-    justify-content: space-around;
-    border: 1px solid white;
+    
+    border: 1px solid rgb(255, 255, 255);
     padding: 1vh;
     background-color: rgb(124, 101, 255);
     margin: 1vh;
-    border-radius: 2vh;
+    border-radius: 1vh;
+}
+.table2{
+    width: 70%  !important;
+}
+@media (max-width:1100px) {
+    .sidebar-container{
+        width: 100%;
+        margin-bottom: 1vh;
+    }
+    .home{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .add{
+        width: 100% !important;
+        overflow: scroll;
+        margin: auto;
+    }
+    .table2{
+        width: 100%  !important;
+    }
+    
 }
 
 /* form */
+
+
+
+
+
+.log-out{
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+}
 

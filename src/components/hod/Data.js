@@ -83,7 +83,7 @@ function Data(props) {
                         Leave Details
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body  style={{overflow:'scroll'}}>
                     {
                         modal.data.length != 0 ?
                             <>
@@ -144,8 +144,8 @@ function Data(props) {
                     }
                 </Modal.Body>
             </Modal>
-            <Button onClick={props.backHandler}>back</Button>
-            <Table striped="columns">
+            <Button className='back-button' onClick={props.backHandler}>back</Button>
+            <Table striped="columns"  style={{overflow:'scroll'}}>
                 <thead>
                     <tr>
                         <td>#</td>

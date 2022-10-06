@@ -46,7 +46,6 @@ function Login() {
 
         Api.post(`/admin/${action}`, qs.stringify(formData))
             .then(function (response) {
-                if (action === 'register') return navigate('/admin/login');
                 localStorage.setItem('userdata', JSON.stringify(response.data.data));
                 navigate('/home');
             })

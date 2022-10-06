@@ -24,15 +24,20 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    
+    if(!JSON.parse(localStorage.getItem('userdata'))){
+      navigate('/');
+    }
+
     setUser(JSON.parse(localStorage.getItem('userdata')));
   }, []);
 
 
   const logOut = ()=>{
-    var userdata = JSON.stringify(localStorage.getItem('userdata')); 
+    var userdata =localStorage.getItem('userdata'); 
     localStorage.removeItem('userdata');
-    console.log(userdata);
-    if(userdata.type != 'admin') return navigate('/user/login');
+    userdata = JSON.parse(userdata);
+    if(userdata.type != 'admin') return navigate('/');
     navigate('/admin/login');
   }
   
@@ -98,18 +103,18 @@ function Home() {
 
 <div className="sidebar-container">
         <div className="title">
-          <h2>{user.type} Details</h2>
+          <h2>Personal Details</h2>
         </div>
         <div className="sidebar">
           <div className="data">
-            <h4>Name</h4>
+            <h4 className='object'>Name</h4>
             :
-            <h4>{user.name}</h4>
+            <h4 className='object'>{user.name}</h4>
           </div>
           <div className="data">
-            <h4>Username</h4>
+            <h4 className='object'>Username</h4>
             :
-            <h4>{user.username}</h4>
+            <h4 className='object'>{user.username}</h4>
           </div>
         </div>
       </div>
@@ -126,7 +131,7 @@ function Home() {
     }    
     </>}
 
-    <Button onClick={logOut}>Log out</Button>
+    <Button className='log-out' onClick={logOut}>Log out</Button>
 
     </div>
   )

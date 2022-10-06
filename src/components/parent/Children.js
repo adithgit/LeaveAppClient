@@ -87,7 +87,7 @@ function Children(props) {
                         Leave Details
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{overflow:'scroll'}}>
                     {
                         modal.data.length != 0 ?
                             <>
@@ -151,8 +151,8 @@ function Children(props) {
                     }
                 </Modal.Body>
             </Modal>
-            <Button onClick={props.cancelHandle}>back</Button>
-            <Table striped="columns">
+            <Button className='back-button' onClick={props.cancelHandle}>back</Button>
+            <Table striped="columns" className='table2'  style={{overflow:'scroll'}}>
                 <thead>
                     <tr>
                         <td>#</td>
